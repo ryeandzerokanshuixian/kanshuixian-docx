@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勘水仙文档库</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #28a745;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif; 
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e9ecef 100%);
+            padding: 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        
+        .header { 
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); 
+            color: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            margin-bottom: 25px; 
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .status-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #fd7e14;
+        }
+        
+        .status-card.success {
+            border-left-color: var(--success-color);
+            background: #d4edda;
+        }
+        
+        .doc-item { 
+            background: white; 
+            padding: 20px; 
+            margin: 15px 0; 
+            border-radius: 12px; 
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08); 
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .doc-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .doc-title { 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            color: #1a1a1a; 
+        }
+        
+        .doc-description { 
+            font-size: 1rem; 
+            color: #555; 
+            margin-bottom: 12px; 
+        }
+        
+        .doc-meta { 
+            font-size: 0.85rem; 
+            color: #777; 
+            margin-bottom: 15px; 
+        }
+        
+        .btn { 
+            display: inline-block; 
+            padding: 10px 20px; 
+            background: var(--primary-color); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            margin-right: 10px; 
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover { 
+            background: #5a6fd8; 
+            transform: translateY(-2px);
+        }
+        
+        .btn-download {
+            background: var(--success-color);
+        }
+        
+        .btn-download:hover {
+            background: #218838;
+        }
+        
+        .btn-test {
+            background: #6c757d;
+        }
+        
+        .btn-test:hover {
+            background: #545b62;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            padding: 20px;
+        }
+        
+        .file-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        .file-status.exists {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .file-status.missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 10px;
+            }
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 勘水仙文档库</h1>
+            <p>点击直接在线预览或下载 - 完全免费</p>
+        </div>
+        
+        <div class="status-card" id="buildStatus">
+            <h3>🔧 GitHub Pages 构建状态</h3>
+            <p>检测到构建失败。可能的原因：</p>
+            <ul>
+                <li>仓库未设置为 Public</li>
+                <li>index.html 文件路径不正确</li>
+                <li>文件编码问题</li>
+            </ul>
+            <p>请按照以下步骤修复：</p>
+            <ol>
+                <li>确认仓库设置为 <strong>Public</strong></li>
+                <li>确保 index.html 在仓库根目录</li>
+                <li>确认所有Word文档已上传</li>
+                <li>在 Settings → Pages 中重新选择 main 分支</li>
+            </ol>
+        </div>
+        
+        <div id="fileCheckResult"></div>
+        
+        <div id="docList">
+            <!-- 文档列表动态生成 -->
+        </div>
+        
+        <div class="footer">
+            <p>Powered by GitHub Pages | 用户名: ryeandzerokanshuixian | 仓库: kanshuixian-docs</p>
+            <p>访问地址: https://ryeandzerokanshuixian.github.io/kanshuixian-docs/</p>
+        </div>
+    </div>
+
+    <script>
+        // 文档配置
+        const documents = [
+            { title: "补骑", fileName: "补骑.docx", date: "2024-01-20", size: "20KB" },
+            { title: "补骑2", fileName: "补骑2.docx", date: "2024-01-20", size: "20KB" },
+            { title: "璀璨的孤独×双面盗贼", fileName: "璀璨的孤独×双面盗贼.docx", date: "2024-01-20", size: "20KB" },
+            { title: "黑金共振", fileName: "黑金共振.docx", date: "2024-01-20", size: "20KB" },
+            { title: "魂初", fileName: "魂初.docx", date: "2024-01-20", size: "20KB" },
+            { title: "魂处2", fileName: "魂处2.docx", date: "2024-01-20", size: "20KB" },
+            { title: "魂诗", fileName: "魂诗.docx", date: "2024-01-20", size: "20KB" },
+            { title: "矿董×罗纳德×黑郁", fileName: "矿董×罗纳德×黑郁.docx", date: "2024-01-20", size: "20KB" },
+            { title: "骑鼠", fileName: "骑鼠.docx", date: "2024-01-20", size: "20KB" },
+            { title: "骑跳2", fileName: "骑跳2.docx", date: "2024-01-20", size: "20KB" },
+            { title: "骑跳3", fileName: "骑跳3.docx", date: "2024-01-20", size: "20KB" },
+            { title: "陨星×辉铸矿×罪恶焰火", fileName: "陨星×辉铸矿×罪恶焰火.docx", date: "2024-01-20", size: "20KB" },
+            { title: "陨星×试金石", fileName: "陨星×试金石.docx", date: "2024-01-20", size: "20KB" },
+            { title: "罪恶焰火×辉铸矿", fileName: "罪恶焰火×辉铸矿.docx", date: "2024-01-20", size: "20KB" },
+            { title: "罪恶焰火×辉铸矿×淘金客", fileName: "罪恶焰火×辉铸矿×淘金客.docx", date: "2024-01-20", size: "20KB" },
+            { title: "罪恶焰火×陨星×引魂人×辉铸矿", fileName: "罪恶焰火×陨星×引魂人×辉铸矿.docx", date: "2024-01-20", size: "20KB" }
+        ];
+
+        // 检查文件是否存在
+        async function checkFiles() {
+            const resultContainer = document.getElementById('fileCheckResult');
+            let missingFiles = [];
+            
+            for (const doc of documents) {
+                const testUrl = `https://raw.githubusercontent.com/ryeandzerokanshuixian/kanshuixian-docs/main/${encodeURIComponent(doc.fileName)}`;
+                
+                try {
+                    const response = await fetch(testUrl, { method: 'HEAD' });
+                    doc.exists = response.ok;
+                    if (!response.ok) {
+                        missingFiles.push(doc.fileName);
+                    }
+                } catch (error) {
+                    doc.exists = false;
+                    missingFiles.push(doc.fileName);
+                }
+            }
+            
+            if (missingFiles.length === 0) {
+                resultContainer.innerHTML = `
+                    <div class="status-card success">
+                        <h3>✅ 所有文件检查通过</h3>
+                        <p>所有Word文档都已正确上传到仓库。</p>
+                    </div>
+                `;
+            } else {
+                resultContainer.innerHTML = `
+                    <div class="status-card">
+                        <h3>⚠️ 发现缺失文件</h3>
+                        <p>以下文件在仓库中不存在：</p>
+                        <ul>
+                            ${missingFiles.map(file => `<li>${file}</li>`).join('')}
+                        </ul>
+                        <p>请上传这些文件到仓库根目录。</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderDocumentList() {
+            const container = document.getElementById('docList');
+            container.innerHTML = '';
+            
+            documents.forEach(doc => {
+                const encodedFileName = encodeURIComponent(doc.fileName);
+                const rawUrl = `https://raw.githubusercontent.com/ryeandzerokanshuixian/kanshuixian-docs/main/${encodedFileName}`;
+                const downloadUrl = `https://github.com/ryeandzerokanshuixian/kanshuixian-docs/raw/main/${encodedFileName}`;
+                
+                const docElement = document.createElement('div');
+                docElement.className = 'doc-item';
+                docElement.innerHTML = `
+                    <div class="doc-title">
+                        ${doc.title}
+                        <span class="file-status ${doc.exists ? 'exists' : 'missing'}">
+                            ${doc.exists ? '✓ 存在' : '✗ 缺失'}
+                        </span>
+                    </div>
+                    <div class="doc-meta">
+                        📅 ${doc.date} | 📦 ${doc.size} | 📄 ${doc.fileName}
+                    </div>
+                    <div>
+                        <a href="https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(rawUrl)}" 
+                           target="_blank" class="btn">👁️ 在线预览</a>
+                        <a href="${downloadUrl}" class="btn btn-download">📥 下载</a>
+                        <a href="${rawUrl}" target="_blank" class="btn btn-test">🔗 测试链接</a>
+                    </div>
+                `;
+                container.appendChild(docElement);
+            });
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', async function() {
+            await checkFiles();
+            renderDocumentList();
+        });
+    </script>
+</body>
+</html>
