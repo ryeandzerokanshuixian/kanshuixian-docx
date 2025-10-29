@@ -208,8 +208,8 @@
         </div>
         
         <div class="footer">
-            <p>Powered by GitHub Pages | 用户名: ryeandzerokanshuixian | 仓库: kanshuixian-docs</p>
-            <p>访问地址: https://ryeandzerokanshuixian.github.io/kanshuixian-docs/</p>
+            <p>Powered by GitHub Pages | 用户名: ryeandzerokanshuixian | 仓库: kanshuixian-docx</p>
+            <p>访问地址: https://ryeandzerokanshuixian.github.io/kanshuixian-docx/</p>
         </div>
     </div>
 
@@ -240,7 +240,7 @@
             let missingFiles = [];
             
             for (const doc of documents) {
-                const testUrl = `https://raw.githubusercontent.com/ryeandzerokanshuixian/kanshuixian-docs/main/${encodeURIComponent(doc.fileName)}`;
+                const testUrl = `https://raw.githubusercontent.com/ryeandzerokanshuixian/kanshuixian-docx/main/${encodeURIComponent(doc.fileName)}`;
                 
                 try {
                     const response = await fetch(testUrl, { method: 'HEAD' });
@@ -281,8 +281,8 @@
             
             documents.forEach(doc => {
                 const encodedFileName = encodeURIComponent(doc.fileName);
-                const rawUrl = `https://raw.githubusercontent.com/ryeandzerokanshuixian/kanshuixian-docs/main/${encodedFileName}`;
-                const downloadUrl = `https://github.com/ryeandzerokanshuixian/kanshuixian-docs/raw/main/${encodedFileName}`;
+                const rawUrl = `https://raw.githubusercontent.com/ryeandzerokanshuixian/kanshuixian-docx/main/${encodedFileName}`;
+                const downloadUrl = `https://github.com/ryeandzerokanshuixian/kanshuixian-docx/raw/main/${encodedFileName}`;
                 
                 const docElement = document.createElement('div');
                 docElement.className = 'doc-item';
