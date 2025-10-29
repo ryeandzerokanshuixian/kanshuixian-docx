@@ -54,15 +54,6 @@
             opacity: 0.9;
         }
         
-        .status-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            border-left: 5px solid #fd7e14;
-        }
-        
         .status-card.success {
             border-left-color: var(--success-color);
             background: #d4edda;
@@ -182,23 +173,6 @@
         <div class="header">
             <h1>📚 勘水仙文档库</h1>
             <p>点击直接在线预览或下载 - 完全免费</p>
-        </div>
-        
-        <div class="status-card" id="buildStatus">
-            <h3>🔧 GitHub Pages 构建状态</h3>
-            <p>检测到构建失败。可能的原因：</p>
-            <ul>
-                <li>仓库未设置为 Public</li>
-                <li>index.html 文件路径不正确</li>
-                <li>文件编码问题</li>
-            </ul>
-            <p>请按照以下步骤修复：</p>
-            <ol>
-                <li>确认仓库设置为 <strong>Public</strong></li>
-                <li>确保 index.html 在仓库根目录</li>
-                <li>确认所有Word文档已上传</li>
-                <li>在 Settings → Pages 中重新选择 main 分支</li>
-            </ol>
         </div>
         
         <div id="fileCheckResult"></div>
